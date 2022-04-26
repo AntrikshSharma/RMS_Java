@@ -1,68 +1,39 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package Classes;
 
-/**
- *
- * @author mural
- */
-class Admin extends User{
-    Admin(String n, String u, String p)
-    {
-        Name = n;
-        Username = u;
-        Password = p;
+import java.util.List;
+import java.util.ArrayList;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.Statement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+class Admin extends Person{
+    public Admin(String username, String password){
+        super(username, password);
     }
-    int login()
-    {
-        String curruser, currpassword;
-        curruser = this.getUserName();
-        currpassword = this.getPassword();
-        /*
-        Check if username and password exists.
-        */
-        return 0;
-    }
-    int createAdmin(String newname, String newuser, String newpass)
-    {
-        String curruser, currpassword;
-        curruser = this.getUserName();
-        currpassword = this.getPassword();
-        /*
-        Insert into database.
-        */
-        return 0;
-    }
-    int removeAdmin(String user)
-    {
-        String curruser, currpassword;
-        curruser = this.getUserName();
-        currpassword = this.getPassword();
-        /*
-        Remove from database.
-        */
-        return 0;
-    }
-    int createEmployee(String newcode, String newname, String newuser, String newpass)
-    {
-        String curruser, currpassword;
-        curruser = this.getUserName();
-        currpassword = this.getPassword();
-        /*
-        Insert into database.
-        */
-        return 0;
-    }
-    int removeEmployee(String user)
-    {
-        String curruser, currpassword;
-        curruser = this.getUserName();
-        currpassword = this.getPassword();
-        /*
-        Remove from database.
-        */
-        return 0;
+    
+    public List getAll() {
+        List<Admin> obj = new ArrayList<>();
+        Connection conn = null;
+        String url = "jdbc:mysql://localhostL3306/rest";
+        String userName = "root";
+        String pass = "admin@123";
+        try {
+            conn = DriverManager.getConnection(url, userName, pass);
+            String query = 
+                    "";
+        }catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                conn.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(Admin.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return obj;
     }
 }
