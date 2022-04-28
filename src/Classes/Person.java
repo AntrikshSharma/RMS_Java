@@ -10,10 +10,10 @@ public class Person {
     }
     
     protected String getUsername() {
-        return username;
+        return this.username;
     }
     
     protected String getPassword() {
-        return password;
+        return this.password;
     }
 }

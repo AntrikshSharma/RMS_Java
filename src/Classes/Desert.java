@@ -11,11 +11,11 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-class Desert implements Item{
+public class Desert implements Item{
     private String name;
     private float price;
     
-    Desert (String n, float p)
+    public Desert (String n, float p)
     {
         name = n;
         price = p;
@@ -31,7 +31,7 @@ class Desert implements Item{
         return price;
     }
     
-   public int save() { 
+    public int save() { 
         Connection conn = null;
         String url = "jdbc:mysql://localhost:3306/rest";
         String userName = "root";
@@ -40,7 +40,7 @@ class Desert implements Item{
             conn = DriverManager.getConnection(url, userName, password);
             
             String query = 
-                    "insert into rest.food_items(type, price) values(\"" + this.name + "\", "  + this.price + ");";
+                    "insert into rest.food_items(type, price, name) values(\"Desert\", " + this.price + ", \""  + this.name + "\");";
             
             Statement stm = conn.createStatement();
 
@@ -69,14 +69,14 @@ class Desert implements Item{
             conn = DriverManager.getConnection(url, userName, password);
             
             String query = 
-                    "select * from rest.food_items where type=\"" + this.getName() + "\";";
+                    "select * from rest.food_items where type=\"Desert\";";
             
             Statement stm = conn.createStatement();
             
             ResultSet result = stm.executeQuery(query);
             
             while ( result.next() ) {
-                Desert bev = new Desert(result.getString(2), Float.parseFloat(result.getString(3)));
+                Desert bev = new Desert(result.getString(4), Float.parseFloat(result.getString(3)));
                 obj.add(bev);
             }
             

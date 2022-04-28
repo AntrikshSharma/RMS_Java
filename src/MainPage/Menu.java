@@ -4,6 +4,10 @@
  */
 package MainPage;
 
+import Classes.Beverage;
+import Classes.Desert;
+import Classes.Food;
+import java.util.List;
 import javax.swing.DefaultListModel;
 
 /**
@@ -15,16 +19,38 @@ public class Menu extends javax.swing.JFrame {
     /**
      * Creates new form Menu
      */
+    Food foodobj = new Food("test", 100);        
+    Beverage bevobj = new Beverage("test", 100);        
+    Desert desertobj = new Desert("test", 100);
+
+    List <Food> foodlist = foodobj.getAll();
+    List <Beverage> bevlist = bevobj.getAll();
+    List <Desert> deslist = desertobj.getAll();
+    
     public Menu() {
         
         initComponents();
         DefaultListModel dlm = new DefaultListModel();
         
-        dlm.addElement("ABC");
+        for (int i=0; i < foodlist.size(); i++) {
+            dlm.addElement(foodlist.get(i).getName()+" - "+foodlist.get(i).getPrice());
+        }
         
         food.setModel(dlm);
-        bev.setModel(dlm);
-        des.setModel(dlm);
+        
+        DefaultListModel dlm2 = new DefaultListModel();
+        
+        for (int i=0; i < bevlist.size(); i++) {
+            dlm2.addElement(bevlist.get(i).getName()+" - "+bevlist.get(i).getPrice());
+        }
+        bev.setModel(dlm2);
+        
+        DefaultListModel dlm3 = new DefaultListModel();
+        
+        for (int i=0; i < deslist.size(); i++) {
+            dlm3.addElement(deslist.get(i).getName()+" - "+deslist.get(i).getPrice());
+        }
+        des.setModel(dlm3);
         
         
         

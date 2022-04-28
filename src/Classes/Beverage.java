@@ -29,11 +29,11 @@ public class Beverage implements Item{
         return price;
     }
     
-    int getQty(){
+    public int getQty(){
         return qty;
     }
     
-   public int save() { 
+     public int save() { 
         Connection conn = null;
         String url = "jdbc:mysql://localhost:3306/rest";
         String userName = "root";
@@ -42,7 +42,7 @@ public class Beverage implements Item{
             conn = DriverManager.getConnection(url, userName, password);
             
             String query = 
-                    "insert into rest.food_items(type, price) values(\"" + this.name + "\", "  + this.price + ");";
+                    "insert into rest.food_items(type, price, name) values(\"Beverage\", " + this.price + ", \""  + this.name + "\");";
             
             Statement stm = conn.createStatement();
 
@@ -61,7 +61,7 @@ public class Beverage implements Item{
         }
     }
     
-    public List getAll() {
+public List getAll() {
         List<Beverage> obj = new ArrayList<>();
         Connection conn = null;
         String url = "jdbc:mysql://localhost:3306/rest";
@@ -71,14 +71,14 @@ public class Beverage implements Item{
             conn = DriverManager.getConnection(url, userName, password);
             
             String query = 
-                    "select * from rest.food_items where type=\"" + this.getName() + "\";";
+                    "select * from rest.food_items where type=\"Beverage\";";
             
             Statement stm = conn.createStatement();
             
             ResultSet result = stm.executeQuery(query);
             
             while ( result.next() ) {
-                Beverage bev = new Beverage(result.getString(2), Float.parseFloat(result.getString(3)));
+                Beverage bev = new Beverage(result.getString(4), Float.parseFloat(result.getString(3)));
                 obj.add(bev);
             }
             

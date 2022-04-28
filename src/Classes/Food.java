@@ -11,11 +11,11 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 
-class Food implements Item {
+public class Food implements Item {
     private String name;
     private float price;
     
-    Food (String n, float p){
+    public Food (String n, float p){
         name = n;
         price = p;
     }
@@ -37,7 +37,7 @@ class Food implements Item {
             conn = DriverManager.getConnection(url, userName, password);
             
             String query = 
-                    "insert into rest.food_items(type, price) values(\"" + this.name + "\", "  + this.price + ");";
+                    "insert into rest.food_items(type, price, name) values(\"Food\", " + this.price + ", \""  + this.name + "\");";
             
             Statement stm = conn.createStatement();
 
@@ -66,14 +66,14 @@ class Food implements Item {
             conn = DriverManager.getConnection(url, userName, password);
             
             String query = 
-                    "select * from rest.food_items where type=\"" + this.getName() + "\";";
+                    "select * from rest.food_items where type=\"Food\";";
             
             Statement stm = conn.createStatement();
             
             ResultSet result = stm.executeQuery(query);
             
             while ( result.next() ) {
-                Food bev = new Food(result.getString(2), Float.parseFloat(result.getString(3)));
+                Food bev = new Food(result.getString(4), Float.parseFloat(result.getString(3)));
                 obj.add(bev);
             }
             
